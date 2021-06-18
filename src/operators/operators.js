@@ -1,6 +1,6 @@
-export function add() {
+export function add(a, b) {
   // TODO
-  throw 'Not implemented';
+  return a + b
 }
 
 export function subtract() {

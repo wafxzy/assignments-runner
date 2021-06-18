@@ -1,4 +1,4 @@
-import { add, complex, subtract } from './math';
+import { add, complex, subtract } from './operators';
 
 describe('add', () => {
   test('adds 1 + 2 to equal 3', () => {
