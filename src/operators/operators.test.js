@@ -56,6 +56,16 @@ describe('subtract', () => {
   });
 });
 
+// Complex function should take two parameters, each of them it is a list of 2 values (like a tuple)
+// The first list should multiply 2 values 
+// The second list should divide 2 values  
+// In summary we need to square the first result by the second result
+// Example: 
+// complex([4, 4], [4, 2])
+// 1 - [4, 4] => 4 * 4 = 16
+// 2 - [4, 2] => 4 / 2 = 2
+// 3 - 16 and 2 => 16^2 = 256
+
 describe('complex', () => {
   test('complex [4,4] and [4,2] to equal 1', () => {
     expect(complex([4, 4], [4, 2])).toBe(256);
