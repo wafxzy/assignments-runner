@@ -36,7 +36,7 @@ describe('map', () => {
   });
 
   test('map to profile', () => {
-    const inputList = [{ name: 'Test1', surname: 'Test1' }, { surname: 'Test2' }, { name: 'Test3', age: 10 }, { age: 11, name: 'Test2' }];
+    const inputList = [{ name: 'Test1', surname: 'Test1' }, { surname: 'Test2' }, { name: 'Test3', age: 10 }, { age: 65, name: 'Test2' }, {}];
     const outputList = [
       { name: 'Test1', surname: 'Test1', fullname: 'Test1 Test1', age: null },
       { name: null, surname: 'Test2', fullname: '_ Test2', age: null },
