@@ -13,10 +13,6 @@ describe('add', () => {
     expect(add(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY)).toBe(null);
   });
 
-  test('adds Number.NEGATIVE_INFINITY + Number.POSITIVE_INFINITY to equal null', () => {
-    expect(add(Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY)).toBe(null);
-  });
-
   test('adds empty string + 0 to equal null', () => {
     expect(add('', 0)).toBe(null);
   });
