@@ -79,12 +79,8 @@ describe('complex', () => {
     expect(complex([10, 0.5], [10, 0])).toBe(null);
   });
 
-  test('complex [-10, -5] and [9, -3] to equal 8e-3', () => {
-    expect(complex([-10, -5], [9, -3])).toBe(8e-3);
-  });
-
-  test('complex [-10, -5] and [9, -3] to equal 8e-3', () => {
-    expect(complex([-10, -5], [9, -3])).toBe(8e-3);
+  test('complex [-10, -5] and [9, -3] to equal 8e-6', () => {
+    expect(complex([-10, -5], [9, -3])).toBe(8e-6);
   });
 
   test('complex [5, -3] and [null, 1] to equal null', () => {

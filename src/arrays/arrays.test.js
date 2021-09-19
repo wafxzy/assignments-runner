@@ -59,7 +59,7 @@ describe('map', () => {
 
 describe('reduce', () => {
   test('reduce to summary number', () => {
-    expect(reduceTo([1, 3, 5, 7])).toBe(6);
+    expect(reduceTo([1, 3, 5, 7])).toBe(16);
   });
 
   test('reduce to summary by property', () => {
