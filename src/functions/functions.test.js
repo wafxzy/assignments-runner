@@ -26,8 +26,8 @@ describe('counter', () => {
   });
 
   test('initial state unnamed counter', () => {
-    expect(counter(10), 10);
-    expect(counter(), 11);
+    expect(counter(10)).toBe( 10);
+    expect(counter()).toBe(11);
 
     expect(counter(10)).toBe(10);
     expect(counter()).toBe(11);
@@ -47,7 +47,7 @@ describe('counter', () => {
     expect(counter(100, 'counter2')).toBe(100);
     expect(counter('counter2')).toBe(101);
     expect(counter(5)).toBe(5);
-    expect(counter()).toBe(0);
+    expect(counter()).toBe(6);
   });
 });
 
