@@ -14,7 +14,8 @@ return null;
  /*if(isNaN(a) && typeof Number(b) && b===1){
    return null;
  }*/
- if (a===null &&b ===null) {
+ if (a == Number.NEGATIVE_INFINITY || b == Number.POSITIVE_INFINITY || a == '' || typeof  b == "object" || isNaN(a) == true || a == null || b == null) 
+   {
    return null;
  }
  else{
@@ -38,7 +39,7 @@ export function subtract(a, b) {
    /* if(typeof Number(a) && b===null){
       return null;
     }*/
-    if(typeof Number(a) && b==-undefined){
+    if( typeof a=="object"  || b == '' || b == null || typeof isNaN(a)==true){
       return null;
     }
     else {
