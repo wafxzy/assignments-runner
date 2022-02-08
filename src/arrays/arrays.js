@@ -12,9 +12,33 @@ export function mapTo(object, query) {
 }
 }
 
-export function mapToProfile() {
-  // TODO:
-  throw 'Not implemented';
+export function mapToProfile(array) {
+  return array.map(function (elem) {
+    let name = elem.name || null;
+    let surname = elem.surname || null;
+    let fullname = null;
+    if (name || surname) {
+      fullname = (name || "_") + " " + (surname || "_");
+    }
+    let age = elem.age || null;
+
+    let proto = {
+      get isOld() {
+        return this.age >= 60;
+      },
+      get isAnonymous() {
+        return this.fullname ? false : true;
+      },
+    };
+
+    let obj = Object.create(proto);
+    obj.name = name;
+    obj.surname = surname;
+    obj.fullname = fullname;
+    obj.age = age;
+
+    return obj;
+  });
 }
 
 export function filterBy(object, query) {
@@ -62,15 +86,50 @@ export function reduceTo(object, query) {
   }
 }
 
-export function sort(object, query) {
-  switch (typeof query) {
-    case "undefined":{
-      return object.sort((a, b) => a - b);      
-    }
-    case "string":{
-      return object.sort((a, b) => a[query] - b[query]);
-    }
+function sortByOrder(a, b, order ) {
+  let result=null;
+
+  switch (order) {
+    case "desc":{
+      if (a > b) result = -1;
+      if (a < b) result = 1;
+      return result;
   }
+    case "asc":{
+      if (a < b) result =-1;
+      if (a > b) result = 1;
+      return result;
+    }
+    default: 0;
+  }
+}
+
+export function sort(array, sortParam) {
+  switch (typeof sortParam) {
+    case "undefined":
+      return array.sort((a, b) => a - b);
+
+    case "string":
+      return array.sort((a, b) => a[sortParam] - b[sortParam]);
+
+    case "object":
+      return array.sort((a, b) => {
+        for (let i = 0; i < sortParam.length; i++) {
+          const key = sortParam[i];
+          const field = key.field ? key.field : key;
+          const order = key.order ? key.order : null;
+          const isDescSort = order === "desc";
+    
+          if (a[field] > b[field]) {
+            return isDescSort ? -1 : 1;
+          }
+          if (a[field] < b[field]) {
+            return isDescSort ? 1 : -1;
+          }
+        }      
+        return 0;
+      });
+    }
 }
 
 export function complex(object, queryparam) {
@@ -91,7 +150,12 @@ export function complex(object, queryparam) {
           return pv;},
            0);
         break;
-        }}
+        }
+        case "sort":{
+          res = res.sort((a, b) => sortByOrder(a, b, param.order));
+          break;
+        }
+      }
   });
   return res;
 }
