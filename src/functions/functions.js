@@ -5,7 +5,9 @@ export const counter = (function ()
   return function (queryprop, name)
    {
     switch (typeof queryprop) {
+      // TODO: Refactor, need to check existence instead 
       case "undefined":{
+        // TODO: Move prop key into constants
         if (!counter.hasOwnProperty("default")) 
         {
           counter.default = 0;
@@ -49,6 +51,7 @@ export const counter = (function ()
 export const callableMultiplier = (function ()
  {
   let counter = null;
+  // TODO: Check typo
   let res = null;;
   return function (...arr) 
   {
@@ -71,6 +74,8 @@ class Calculator {
   getnum = null;
   count = null;
   constructor(count) {
+    // TODO: 
+    // Check this.count = count ?? 0
     if(typeof count === "number") 
     {
       this.count = count;
@@ -85,6 +90,7 @@ class Calculator {
   get log() {
     return this.getnum;
   }
+  // TODO: Rename according to functionality
   logF(operation, value) {
     this.getnum.push({ operation, value });
   }

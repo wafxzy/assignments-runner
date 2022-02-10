@@ -1,6 +1,9 @@
+// TODO: Check if we can rename to array instead of object
 export function mapTo(object, query) {
+  // TODO: Why do we need to check type of instead of existence ?
   switch (typeof query) {
     case "undefined":{
+      // TODO: 
       return object.map((count, index) => index);
     }
     case "string":{    
@@ -27,6 +30,7 @@ export function mapToProfile(array) {
         return this.age >= 60;
       },
       get isAnonymous() {
+        // TODO: Check Logical Not !
         return this.fullname ? false : true;
       },
     };
@@ -42,6 +46,7 @@ export function mapToProfile(array) {
 }
 
 export function filterBy(object, query) {
+  // TODO: Remove unused code 
  //var res=a.filter(a=> a>=5);
  //return res;
  /*var nn=a.filter(n=>n.name && n>=5 && n.age<=10);
@@ -55,9 +60,11 @@ export function filterBy(object, query) {
 
     case "object":
       return object.filter((arr) => {
+        // Please, check if we can rename this prop from arr to more appropriate
         if (!arr.hasOwnProperty(query.property)){ 
           return false;
         }
+        // TODO: Please, check if we can remove this else here
         else{
         return query.filterCb(arr[query.property]);
         }
@@ -67,11 +74,13 @@ export function filterBy(object, query) {
 
 export function reduceTo(object, query) {
   switch (typeof query) {
+    // TODO: Refactor, need to check existence instead 
     case "undefined":{
       return object.reduce((pv, cv) => (pv += cv));
     }
     case "string":
       {
+        // TODO: Refactor, don't use shortcuts
       return object.reduce((pv, cv) => (pv += cv[query]),0);
      }
     case "object":{
@@ -100,6 +109,7 @@ function sortByOrder(a, b, order ) {
       if (a > b) result = 1;
       return result;
     }
+    // TODO: Check usage
     default: 0;
   }
 }
@@ -116,6 +126,7 @@ export function sort(array, sortParam) {
       return array.sort((a, b) => {
         for (let i = 0; i < sortParam.length; i++) {
           const key = sortParam[i];
+          // TODO: Check this approach key.field || key
           const field = key.field ? key.field : key;
           const order = key.order ? key.order : null;
           const isDescSort = order === "desc";
@@ -134,6 +145,7 @@ export function sort(array, sortParam) {
 
 export function complex(object, queryparam) {
   let res;
+  // Refactor to reduce
   queryparam.forEach((param) => {
     switch (param.operation) {
       case "filter":{
