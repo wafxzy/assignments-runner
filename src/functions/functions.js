@@ -76,7 +76,7 @@ class Calculator {
   constructor(count) {
     // TODO: 
     // Check this.count = count ?? 0
-    if(typeof count === "number") 
+    if(typeof count === "number" && count!=0) 
     {
       this.count = count;
      } 

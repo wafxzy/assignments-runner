@@ -1,19 +1,19 @@
 // TODO: Check if we can rename to array instead of object
-export function mapTo(object, query) {
+export function mapTo(array, query) {
   // TODO: Why do we need to check type of instead of existence ?
-  switch (typeof query) {
-    case "undefined":{
+   if(!query)
+   {
       // TODO: 
-      return object.map((count, index) => index);
+      return array.map((count, index) => index);
     }
-    case "string":{    
-      return object.reduce((res, name) => {
+    if(typeof query === 'string'){    
+      return array.reduce((res, name) => {
         if (name[query]) res.push(name[query]);
         return res;
       }, []);
   }
 }
-}
+
 
 export function mapToProfile(array) {
   return array.map(function (elem) {
@@ -31,10 +31,9 @@ export function mapToProfile(array) {
       },
       get isAnonymous() {
         // TODO: Check Logical Not !
-        return this.fullname ? false : true;
+        return !this.fullname;
       },
     };
-
     let obj = Object.create(proto);
     obj.name = name;
     obj.surname = surname;
@@ -47,10 +46,7 @@ export function mapToProfile(array) {
 
 export function filterBy(object, query) {
   // TODO: Remove unused code 
- //var res=a.filter(a=> a>=5);
- //return res;
- /*var nn=a.filter(n=>n.name && n>=5 && n.age<=10);
-  return nn;*/
+
   switch (typeof query) {
     case "number":
       return object.filter((number) => number >= query);
@@ -59,29 +55,32 @@ export function filterBy(object, query) {
       return object.filter((name) => name.hasOwnProperty(query));
 
     case "object":
-      return object.filter((arr) => {
+      return object.filter((array) => {
         // Please, check if we can rename this prop from arr to more appropriate
-        if (!arr.hasOwnProperty(query.property)){ 
+        if (!array.hasOwnProperty(query.property)){ 
           return false;
         }
         // TODO: Please, check if we can remove this else here
-        else{
-        return query.filterCb(arr[query.property]);
-        }
+     
+        return query.filterCb(array[query.property]);
+        
       });
   }
 }
 
 export function reduceTo(object, query) {
-  switch (typeof query) {
+  
     // TODO: Refactor, need to check existence instead 
-    case "undefined":{
+   if(!query){
       return object.reduce((pv, cv) => (pv += cv));
     }
+    switch (typeof query) {
     case "string":
       {
         // TODO: Refactor, don't use shortcuts
-      return object.reduce((pv, cv) => (pv += cv[query]),0);
+      return object.reduce(function (pv, cv) {
+          return (pv += cv[query]);
+        },0);
      }
     case "object":{
       return object.reduce(
@@ -109,8 +108,7 @@ function sortByOrder(a, b, order ) {
       if (a > b) result = 1;
       return result;
     }
-    // TODO: Check usage
-    default: 0;
+
   }
 }
 
@@ -127,7 +125,7 @@ export function sort(array, sortParam) {
         for (let i = 0; i < sortParam.length; i++) {
           const key = sortParam[i];
           // TODO: Check this approach key.field || key
-          const field = key.field ? key.field : key;
+          const field = key.field ?? key;
           const order = key.order ? key.order : null;
           const isDescSort = order === "desc";
     
