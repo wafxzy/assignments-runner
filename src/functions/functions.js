@@ -1,24 +1,24 @@
 export const counter = (function ()
 {
-  const counter = {};
+  const counter = {
+  };
   let res = null;
   return function (queryprop, name)
    {
-    switch (typeof queryprop) {
-      // TODO: Refactor, need to check existence instead 
-      case "undefined":{
+      if(!queryprop){
         // TODO: Move prop key into constants
         if (!counter.hasOwnProperty("default")) 
         {
-          counter.default = 0;
+          counter.default=0;
         }
          else
         {
           counter.default++;
         }
         res = counter.default;
-        break;
-      }
+       
+      }  
+      switch (typeof queryprop) {
       case "number":{
         if (name === undefined) {
           counter.default = queryprop;
@@ -51,8 +51,7 @@ export const counter = (function ()
 export const callableMultiplier = (function ()
  {
   let counter = null;
-  // TODO: Check typo
-  let res = null;;
+  let res = null;
   return function (...arr) 
   {
     if (arr.length>0) {
@@ -74,8 +73,6 @@ class Calculator {
   getnum = null;
   count = null;
   constructor(count) {
-    // TODO: 
-    // Check this.count = count ?? 0
     if(typeof count === "number" && count!=0) 
     {
       this.count = count;
@@ -85,31 +82,30 @@ class Calculator {
      }
 
     this.getnum = [];
-    this.logF("init", this.count);
+    this.logOperation("init", this.count);
   }
   get log() {
     return this.getnum;
   }
-  // TODO: Rename according to functionality
-  logF(operation, value) {
+  logOperation(operation, value) {
     this.getnum.push({ operation, value });
   }
 
   add(value) {
     this.count += value;
-    this.logF("add", value);
+    this.logOperation("add", value);
   }
   subtract(value) {
     this.count -= value;
-    this.logF("subtract", value);
+    this.logOperation("subtract", value);
   }
   multiply(value) {
     this.count *= value;
-    this.logF("multiply", value);
+    this.logOperation("multiply", value);
   }
   divide(value) {
     this.count /= value;
-    this.logF("divide", value);
+    this.logOperation("divide", value);
   }
   get value() {
     return this.count;
