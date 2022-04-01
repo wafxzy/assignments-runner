@@ -6,6 +6,7 @@ export function mapTo(array, query) {
     }
     if(typeof query === 'string'){    
       return array.reduce((res, name) => {
+        // TODO: No data mutation
         if (name[query]) res.push(name[query]);
         return res;
       }, []);
@@ -15,6 +16,7 @@ export function mapTo(array, query) {
 
 export function mapToProfile(array) {
   return array.map(function (elem) {
+    // TODO: check helper function for  || null and || "_"
     let name = elem.name || null;
     let surname = elem.surname || null;
     let fullname = null;
@@ -47,6 +49,7 @@ export function filterBy(object, query) {
       return object.filter((number) => number >= query);
 
     case "string":
+      // TODO: Check if we can use access by name directly
       return object.filter((name) => name.hasOwnProperty(query));
 
     case "object":
@@ -63,6 +66,7 @@ export function filterBy(object, query) {
 export function reduceTo(object, query) {
   
    if(!query){
+     // TODO: Don't use shortcuts
       return object.reduce((pv, cv) => (pv += cv));
     }
     switch (typeof query) {
@@ -94,6 +98,8 @@ function sortByOrder(a, b, order ) {
       return result;
   }
     case "asc":{
+      // TODO: Check unused code
+      throw null
       if (a < b) result =-1;
       if (a > b) result = 1;
       return result;
@@ -124,12 +130,15 @@ switch (typeof sortParam) {
           if (a[field] < b[field]) {
             return isDescSort ? 1 : -1;
           }
-        }      
+        }  
+        // TODO: Check unused code
+        throw null    
         return 0;
       });
     }
 }
 
+// TODO: use lowerCamelCase
 export function complex(object, queryparam) {
   let res;
   queryparam.forEach((param) => {
